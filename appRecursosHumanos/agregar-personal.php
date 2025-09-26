@@ -58,7 +58,18 @@ if(!isset($_SESSION['usuario'])){
         </select>
         <br>
         <label>Fotografía:</label>
-    <input type="file" name="fotografia" class="form-control" accept="image/*">
+        <input type="file" name="fotografia" class="form-control" accept="image/*">
+        <?php 
+        if(isset($data['fotografia']) && $data['fotografia']){
+            $foto_path = 'uploads/' . basename($data['fotografia']);
+            $ext = strtolower(pathinfo($foto_path, PATHINFO_EXTENSION));
+            if (in_array($ext, ['png','jpg','jpeg']) && file_exists($foto_path)) {
+                echo '<br><img src="'.$foto_path.'" style="width:80px;">';
+            } else if(file_exists($foto_path)) {
+                echo '<br><a href="'.$foto_path.'" target="_blank">Ver archivo</a>';
+            }
+        }
+        ?>
         <br>
         <input type="submit" value="Enviar" class="btn btn-primary">
         <a href="personal.php" class="btn btn-secondary">Cancelar</a>

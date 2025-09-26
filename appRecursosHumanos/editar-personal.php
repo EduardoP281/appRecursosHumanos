@@ -78,10 +78,18 @@ if($data){
         <br>
         <label>Fotografía:</label>
         <input type="file" name="fotografia" class="form-control" accept="image/*">
-        <?php if($datos['fotografia']){
-            echo '<br><img src="'.$datos['fotografia'].'" style="width:80px;">';
+        <?php 
+        if($datos['fotografia']){
+            $foto_path = 'uploads/' . basename($datos['fotografia']);
+            $ext = strtolower(pathinfo($foto_path, PATHINFO_EXTENSION));
+            if (in_array($ext, ['png','jpg','jpeg']) && file_exists($foto_path)) {
+                echo '<br><img src="'.$foto_path.'" style="width:80px;">';
+            } else if(file_exists($foto_path)) {
+                echo '<br><a href="'.$foto_path.'" target="_blank">Ver archivo</a>';
+            }
             echo '<br><input type="checkbox" name="quitar_foto" value="1"> Quitar imagen de perfil';
-        } ?>
+        }
+        ?>
         <br>
         <input type="submit" value="Guardar Cambios" class="btn btn-primary">
         <a href="personal.php" class="btn btn-secondary">Cancelar</a>

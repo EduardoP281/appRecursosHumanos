@@ -44,6 +44,7 @@ if($error==1){
     <input type="submit" class="form-control btn btn-primary" value="Registrar">
     </form>
 </div>
+
 </body>
 </html>
 <?php
