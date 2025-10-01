@@ -7,7 +7,7 @@
     <title>Inicio de sesión</title>
 </head>
 <body>
-<form action="validacion.php" method="POST">
+<form action="php/validacion.php" method="POST">
   <div class="form-group ">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
