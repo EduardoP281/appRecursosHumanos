@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./public/css/style.css"></head>
 <body>
     <div class="registration-form">
-        <form action="validacion.php" method="POST">
+        <form action="php/validacion.php" method="POST">
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
             </div>
@@ -35,3 +35,4 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script></body>
 </html>
+
