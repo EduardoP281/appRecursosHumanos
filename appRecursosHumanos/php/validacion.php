@@ -16,7 +16,8 @@ if ($validar > 0) {
     header('Location: ../vistas/home.php');
     exit;
 } else {
-    header('Location: index.php?error=error');
+    header('Location: ../index.php?error=error');
     exit;
 }
+
 ?>
