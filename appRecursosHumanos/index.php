@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+qu<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,10 +14,10 @@
                 <span><i class="icon icon-user"></i></span>
             </div>
             <div class="form-group">
-                <input type="email" class="form-control item" id="email" name="email" placeholder="Correo">
+                <input type="email" class="form-control item" id="email" name="email" placeholder="Correo" required>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control item" id="password" name="pwd" placeholder="Contraseña">
+                <input type="password" class="form-control item" id="password" name="pwd" placeholder="Contraseña" required>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-block create-account">Iniciar Sesion</button>
@@ -35,4 +35,5 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script></body>
 </html>
+
 
