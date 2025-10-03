@@ -1,7 +1,7 @@
 <?php
 $server="localhost";
 $user="root";
-$pwd="Sanatwice11";
+$pwd="";
 $db="dbrhh";
 
 $con= new mysqli($server, $user,
@@ -12,5 +12,4 @@ if($con)
 }else{
     echo "Ha ocurriod un error de conexión";
 }
-
 ?>
