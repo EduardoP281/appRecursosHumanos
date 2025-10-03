@@ -16,10 +16,11 @@
     </li>
 
       <li class="nav-item">
-         <a class="nav-link" style="color:white" href="../php/salir.php">Cerrar Sessión</a>
+         <a class="nav-link" style="color:white" href="php/salir.php">Cerrar Sessión</a>
       </li>
       
     </ul>
   </div>
 
 </nav>
+
