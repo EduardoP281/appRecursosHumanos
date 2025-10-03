@@ -68,7 +68,7 @@ include_once __DIR__ . '/../conf/conf.php';
                         <div class="row mb-3">
                             <div class="col-md-8">
                                 <form action="usuarios.php" method="POST" class="d-flex">
-                                    <input type="text" name="busqueda" class="form-control me-2" placeholder="Buscar por usuario o correo" required>
+                                    <input type="text" name="busqueda" class="form-control me-2" placeholder="Buscar por usuario o correo" >
                                     <button type="submit" class="btn btn-primary">Buscar</button>
                                 </form>
                             </div>
@@ -146,4 +146,5 @@ include_once __DIR__ . '/../conf/conf.php';
     </div>
 </div>
 </body>
+
 </html>
