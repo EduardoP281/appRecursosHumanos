@@ -10,6 +10,13 @@ $bandera = isset($_POST['bandera']) ? $_POST['bandera'] : "";
 $rol_id  = isset($_POST['rol_id'])  ? mysqli_real_escape_string($con, $_POST['rol_id']) : "";
 
 if ($bandera == 1) {
+    // Validar rol obligatorio
+    if ($rol_id !== 'admin' && $rol_id !== 'superadmin') {
+        header('Location: ../vistas/agregar-usuario.php?error=2&usuario=' . $nombre . '&correo=' . $usuario);
+        exit;
+    }
+
+    // Verificar si el nombre de usuario ya existe
     $vericar_nombre = "SELECT * FROM usuario WHERE usuario = '$nombre'";
     $verificar_sql = mysqli_query($con, $vericar_nombre);
 
@@ -17,7 +24,8 @@ if ($bandera == 1) {
         header('Location: ../vistas/agregar-usuario.php?error=1&usuario=' . $nombre . '&correo=' . $usuario);
         exit;
     } else {
-        $insertar = "INSERT INTO usuario (id, usuario, email, pwd) VALUES (NULL, '$nombre', '$usuario', '$passformat')";
+        // Insertar nuevo usuario con rol
+        $insertar = "INSERT INTO usuario (id, usuario, email, pwd, rol_id) VALUES (NULL, '$nombre', '$usuario', '$passformat', '$rol_id')";
         $ejecucion = mysqli_query($con, $insertar);
 
         if ($ejecucion) {
@@ -30,6 +38,7 @@ if ($bandera == 1) {
     }
 
 } elseif ($bandera == 2) {
+    // Actualización de usuario sin rol
     $estado_nombre = "SELECT usuario FROM usuario WHERE id = $id";
     $verificar_sql = mysqli_query($con, $estado_nombre);
     $verificador = mysqli_fetch_assoc($verificar_sql);
