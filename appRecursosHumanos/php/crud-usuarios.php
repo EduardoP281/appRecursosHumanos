@@ -5,13 +5,13 @@ $id      = isset($_POST['id'])      ? mysqli_real_escape_string($con, $_POST['id
 $nombre  = isset($_POST['usuario']) ? mysqli_real_escape_string($con, $_POST['usuario']) : "";
 $usuario = isset($_POST['correo'])  ? mysqli_real_escape_string($con, $_POST['correo']) : "";
 $pwd     = isset($_POST['pwd'])     ? mysqli_real_escape_string($con, $_POST['pwd']) : "";
-$passformat = md5($pwd); // ⚠️ Se mantiene md5 como en tu original
+$passformat = md5($pwd);
 $bandera = isset($_POST['bandera']) ? $_POST['bandera'] : "";
 $rol_id  = isset($_POST['rol_id'])  ? mysqli_real_escape_string($con, $_POST['rol_id']) : "";
 
 if ($bandera == 1) {
-    // Validar rol obligatorio
-    if ($rol_id !== 'admin' && $rol_id !== 'superadmin') {
+    // Validar que el rol sea obligatorio y válido
+    if (!in_array($rol_id, ['1', '2'])) {
         header('Location: ../vistas/agregar-usuario.php?error=2&usuario=' . $nombre . '&correo=' . $usuario);
         exit;
     }
@@ -25,7 +25,7 @@ if ($bandera == 1) {
         exit;
     } else {
         // Insertar nuevo usuario con rol
-        $insertar = "INSERT INTO usuario (id, usuario, email, pwd, rol_id) VALUES (NULL, '$nombre', '$usuario', '$passformat', '$rol_id')";
+        $insertar = "INSERT INTO usuario (id, usuario, email, pwd, rol_id) VALUES (NULL, '$nombre', '$usuario', '$passformat', $rol_id)";
         $ejecucion = mysqli_query($con, $insertar);
 
         if ($ejecucion) {
@@ -80,15 +80,15 @@ if ($bandera == 1) {
     }
 
 } elseif ($bandera == 6) {
-    // ✅ Actualizar rol si se seleccionó
+    // Actualizar rol si se seleccionó
     if (!empty($rol_id)) {
-        $update_rol = "UPDATE usuario SET rol_id = '$rol_id' WHERE id = '$id'";
+        $update_rol = "UPDATE usuario SET rol_id = $rol_id WHERE id = $id";
         mysqli_query($con, $update_rol);
     }
 
-    // ✅ Actualizar contraseña si se ingresó
+    // Actualizar contraseña si se ingresó
     if (!empty($pwd)) {
-        $update_pwd = "UPDATE usuario SET pwd = '$passformat' WHERE id = '$id'";
+        $update_pwd = "UPDATE usuario SET pwd = '$passformat' WHERE id = $id";
         mysqli_query($con, $update_pwd);
     }
 
