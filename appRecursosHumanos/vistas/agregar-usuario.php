@@ -46,13 +46,12 @@ $error   = isset($_GET['error'])   ? intval($_GET['error']) : 0;
             <input type="password" name="pwd" id="pwd" class="form-control" pattern="(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{8,}" required placeholder="*********">
             <br>
 
-             <label for="rol_id" class="form-label mt-3">Rol</label>
+            <label for="rol_id" class="form-label mt-3">Rol</label>
             <select name="rol_id" id="rol_id" class="form-control" required>
                 <option value="" disabled selected>Seleccione un rol</option>
-                <option value="admin">Admin</option>
-                <option value="superadmin">Superadmin</option>
+                <option value="1">Superadmin</option>
+                <option value="2">Admin</option>
             </select>
-            
             <input type="submit" class="form-control btn btn-primary" value="Registrar">
         </form>
     </div>
@@ -60,3 +59,4 @@ $error   = isset($_GET['error'])   ? intval($_GET['error']) : 0;
 </body>
 
 </html>
+
