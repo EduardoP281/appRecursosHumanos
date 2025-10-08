@@ -37,13 +37,13 @@ $error   = isset($_GET['error'])   ? intval($_GET['error']) : 0;
             <input type="hidden" name="bandera" value="1">
 
             <label for="usuario" class="form-label">Usuario</label>
-            <input type="text" name="usuario" id="usuario" class="form-control" required placeholder="Ingrese su nombre de usuario" value="<?= $nombre ?>">
+            <input type="text" name="usuario" id="usuario" class="form-control" pattern="^[a-zA-Z0-9_]{4,50}$" required placeholder="Ingrese su nombre de usuario" value="<?= $nombre ?>">
 
             <label for="correo" class="form-label">Correo</label>
-            <input type="email" name="correo" id="correo" class="form-control" required placeholder="Ingrese su correo válido" value="<?= $usuario ?>">
+            <input type="email" name="correo" id="correo" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required placeholder="Ingrese su correo válido" value="<?= $usuario ?>">
 
             <label for="pwd" class="form-label">Contraseña</label>
-            <input type="password" name="pwd" id="pwd" class="form-control" required placeholder="*********">
+            <input type="password" name="pwd" id="pwd" class="form-control" pattern="(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d@$!%*?&]{8,}" required placeholder="*********">
             <br>
             <input type="submit" class="form-control btn btn-primary" value="Registrar">
         </form>

@@ -1,7 +1,7 @@
 <?php
 $server="localhost";
 $user="root";
-$pwd="Sanatwice11";
+$pwd="";
 $db="dbrhh";
 
 $con= new mysqli($server, $user,
