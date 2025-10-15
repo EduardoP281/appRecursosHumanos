@@ -12,5 +12,4 @@ if($con)
 }else{
     echo "Ha ocurriod un error de conexión";
 }
-
 ?>

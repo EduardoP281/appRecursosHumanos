@@ -59,4 +59,3 @@ $error   = isset($_GET['error'])   ? intval($_GET['error']) : 0;
 </body>
 
 </html>
-
