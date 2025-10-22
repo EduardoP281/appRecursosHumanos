@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 }
 include_once __DIR__ . '/../conf/conf.php';
@@ -43,7 +43,7 @@ include_once __DIR__ . '/../conf/conf.php';
     </div>
     
     <div id="paginacion-container" class="mt-4">
-        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="agregarPersonalModal" tabindex="-1" aria-labelledby="modalLabelAgregar" aria-hidden="true">
@@ -202,6 +202,28 @@ include_once __DIR__ . '/../conf/conf.php';
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalConfirmarEliminar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro que deseas eliminar <strong id="nombreEliminar"></strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <form id="formEliminar" method="GET" action="eliminar-personal.php">
+          <input type="hidden" name="id" id="idEliminar">
+          <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -362,6 +384,17 @@ $(document).ready(function(){
     });
 
 });
+
+$(document).on('click', '.btn-eliminar', function() {
+    const id = $(this).data('id');
+    const nombre = $(this).data('nombre');
+
+    $('#idEliminar').val(id);
+    $('#nombreEliminar').text(nombre);
+    const modal = new bootstrap.Modal(document.getElementById('modalConfirmarEliminar'));
+    modal.show();
+});
+
 </script>
 
 </body>

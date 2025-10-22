@@ -3,7 +3,7 @@ session_start();
 // echo "Bienvenido ".$_SESSION['usuario'];
 
 if(isset($_SESSION['usuario'])== null){
-    Header('Location: index.php');
+    Header('Location: ../index.php');
 }
 ?>
 <!DOCTYPE html>

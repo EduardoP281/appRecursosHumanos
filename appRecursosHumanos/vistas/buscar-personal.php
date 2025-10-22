@@ -109,8 +109,8 @@ if ($resultado->num_rows > 0) {
                     ✏️
                 </button>
                 
-                <a href="eliminar-personal.php?id='.$row['id'].'" class="btn btn-danger btn-sm" title="Eliminar" onclick="return confirm(\'¿Seguro?\')">🗑️</a>
-                
+                <button type="button" class="btn btn-danger btn-sm btn-eliminar" data-id="'.$row['id'].'" data-nombre="'.htmlspecialchars($row['nombre']).'" title="Eliminar">🗑️</button>
+
                 <button type="button" class="btn btn-info btn-sm" title="Ver Detalles" data-bs-toggle="modal" data-bs-target="#verModal'.$row['id'].'">👁️</button>
             </td>
         </tr>';
