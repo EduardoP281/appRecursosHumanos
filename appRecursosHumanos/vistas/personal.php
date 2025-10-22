@@ -225,6 +225,24 @@ include_once __DIR__ . '/../conf/conf.php';
 </div>
 
 
+<footer style="position: relative; height: 50px; background-color: #f9f9f9;">
+    <div id="hidden-trigger" style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; cursor: pointer;"></div>
+
+    <div id="hidden-form" style="display: none; position: absolute; bottom: 5px; right: 5px;">
+        <form method="post" action="generar_script.php">
+            <button type="submit" style="padding: 4px 8px; font-size: 12px;">Generar registros</button>
+        </form>
+    </div>
+</footer>
+
+<script>
+document.getElementById('hidden-trigger').addEventListener('click', function () {
+    const form = document.getElementById('hidden-form');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+});
+</script>
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
