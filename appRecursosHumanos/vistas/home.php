@@ -1,72 +1,67 @@
 <?php
 session_start();
-// echo "Bienvenido ".$_SESSION['usuario'];
-
-if(isset($_SESSION['usuario'])== null){
+if (!isset($_SESSION['usuario'])) {
     Header('Location: ../index.php');
+    exit;
 }
-?>
+include_once('../conf/conf.php');
 
-<?php
-include_once('../conf/conf.php'); // Asegúrate de tener tu conexión aquí
-
-// Consulta para contar personal por departamento
+// Consulta para la gráfica INICIAL
 $sql = "SELECT departamento, COUNT(*) AS cantidad FROM personal GROUP BY departamento";
 $result = mysqli_query($con, $sql);
-
-// Construir CSV
 $csvData = "Departamento,Cantidad\n";
-while ($row = mysqli_fetch_assoc($result)) {
-    $csvData .= "{$row['departamento']},{$row['cantidad']}\n";
+if ($result->num_rows > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $csvData .= "{$row['departamento']},{$row['cantidad']}\n";
+    }
+} else {
+    $csvData .= "Sin datos,0\n";
 }
+$con->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="../public/css/homeStyle.css">
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-        <script src="https://code.highcharts.com/dashboards/dashboards.js"></script>
-        <script src="https://code.highcharts.com/dashboards/modules/layout.js"></script>
-        <title>Panel Contentido</title>
-    </head>
-    <body>
-        <?php
-        include_once('./nav.php');
-        ?>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/homeStyle.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/dashboards/dashboards.js"></script>
+    <script src="https://code.highcharts.com/dashboards/modules/layout.js"></script>
+    <title>Panel Contenido</title>
+</head>
+<body>
+    <?php include_once('./nav.php'); ?>
 
-        /* EL FORMULARIO NO SIRVE */
-        <div class="container my-3">
-            <form id="filtroForm" class="row g-3">
-                <div class="col-md-6">
-                    <label for="estadoCivil" class="form-label">Estado Civil</label>
-                    <select id="estadoCivil" name="estadoCivil" class="form-select">
-                        <option value="">Todos</option>
-                        <option value="Soltero">Soltero</option>
-                        <option value="Casado">Casado</option>
-                        <option value="Divorciado">Divorciado</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="departamento" class="form-label">Departamento</label>
-                    <select id="departamento" name="departamento" class="form-select">
-                        <option value="">Todos</option>
-                    </select>
+    <div class="container my-3">
+        <form id="filtroForm" class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label for="estadoCivil" class="form-label">Estado Civil</label>
+                <select id="estadoCivil" name="estadoCivil" class="form-select">
+                    <option value="">Todos</option>
+                    <option value="Soltero">Soltero(a)</option>
+                    <option value="Casado">Casado(a)</option>
+                    <option value="Divorciado">Divorciado(a)</option>
+                    <option value="Viudo">Viudo(a)</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <label for="departamento" class="form-label">Departamento</label>
+                <select id="departamento" name="departamento" class="form-select">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Actualizar</button>
+            </div>
+        </form>
+    </div>
 
-                </div>
-            </form>
-        </div>
-
-
-        /* EL CONTAINER SI TRAE LOS DATOS */
-        <div id="container"></div>
-        <pre id="csv" style="display:none;">
-            <?php echo trim($csvData); ?>
-        </pre>
-    </body>
+    <div id="container"></div>
+    <pre id="csv" style="display:none;"><?php echo trim($csvData); ?></pre>
+</body>
 </html>
 <script src="../public/js/graf.js"></script>
