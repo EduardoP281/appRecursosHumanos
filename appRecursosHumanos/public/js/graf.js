@@ -148,3 +148,62 @@ Dashboards.board('container', {
         }
     }]
 });
+
+const form = document.getElementById('filtroForm');
+const estadoCivil = document.getElementById('estadoCivil');
+const departamento = document.getElementById('departamento');
+
+function actualizarGrafico() {
+  const formData = new FormData(form);
+
+  fetch('../../php/datos_departamento.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.text())
+  .then(csv => {
+    document.querySelector('#csv').innerHTML = csv;
+
+    if (window.dashboard) {
+      window.dashboard.setDataPool({
+        connectors: [{
+          id: 'VegeTable',
+          type: 'CSV',
+          options: { csv: csv }
+        }]
+      });
+    }
+  })
+  .catch(error => console.error("Error en AJAX:", error));
+}
+
+
+//ESTO NO SIRVE
+function cargarDepartamentos() {
+  fetch('../../php/get_departamentos.php')
+    .then(res => {
+      if (!res.ok) throw new Error("Error en la respuesta del servidor");
+      return res.json();
+    })
+    .then(data => {
+      console.log("Departamentos recibidos:", data); // Verifica en consola
+      const select = document.getElementById('departamento');
+
+      // Limpiar opciones anteriores (excepto "Todos")
+      select.innerHTML = '<option value="">Todos</option>';
+
+      data.forEach(dep => {
+        const option = document.createElement('option');
+        option.value = dep;
+        option.textContent = dep;
+        select.appendChild(option);
+      });
+    })
+    .catch(err => console.error("Error cargando departamentos:", err));
+}
+
+document.addEventListener('DOMContentLoaded', cargarDepartamentos);
+
+// Actualizar automáticamente al cambiar filtros
+estadoCivil.addEventListener('change', actualizarGrafico);
+departamento.addEventListener('change', actualizarGrafico);
